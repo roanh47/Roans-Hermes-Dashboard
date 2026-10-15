@@ -50,7 +50,7 @@ export const hu: Translations = {
   },
 
   app: {
-    brand: "Hermes Agent",
+    brand: "Roan's Hermes Dashboard",
     brandShort: "HA",
     closeNavigation: "Navigáció bezárása",
     closeModelTools: "Modell és eszközök bezárása",

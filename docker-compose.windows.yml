@@ -34,5 +34,5 @@ services:
       - HERMES_GID=10000
       - HERMES_DASHBOARD_HOST=0.0.0.0
     ports:
-      - "127.0.0.1:9119:9119"
-    command: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--no-open", "--insecure"]
+      - "127.0.0.1:9120:9120"
+    command: ["dashboard", "--host", "0.0.0.0", "--port", "9120", "--no-open", "--insecure"]

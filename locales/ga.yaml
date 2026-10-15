@@ -3792,7 +3792,7 @@ tips:
   t312: "Forchuireann HERMES_TUI_THEME=light|dark|<hex> téama an TUI ar theirminéil nach socraíonn COLORFGBG."
   t313: "Osclaíonn Ctrl+G nó Ctrl+X Ctrl+E sa TUI an maolán ionchuir in $EDITOR le haghaidh leideanna fada illíne."
   t314: "Rindreálann an TUI LaTeX inlíne — éiríonn $E=mc^2$ ina mhatamaitic Unicode in ionad TeX amh."
-  t315: "Seolann hermes dashboard UI gréasáin áitiúil ag 127.0.0.1:9119 — ní fhágann aon sonraí localhost."
+  t315: "Seolann hermes dashboard UI gréasáin áitiúil ag 127.0.0.1:9120 — ní fhágann aon sonraí localhost."
   t316: "Leabaíonn hermes dashboard TUI iomlán Hermes i do bhrabhsálaí trí xterm.js agus PTY WebSocket."
   t317: "Cuir YAML in ~/.hermes/dashboard-themes/ le dhá dhath pailéid chun craiceann nua a chur ar an deais iomlán."
   t318: "Is breiseáin drop-in iad breiseáin deaise: manifest.json + cuach JS in ~/.hermes/dashboard-plugins/ — ní gá tógáil npm."

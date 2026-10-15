@@ -3792,7 +3792,7 @@ tips:
   t312: "HERMES_TUI_THEME=light|dark|<hex>, COLORFGBG ayarlamayan terminallerde TUI temasını zorla belirler."
   t313: "TUI'de Ctrl+G veya Ctrl+X Ctrl+E, uzun çok satırlı istemler için giriş arabelleğini $EDITOR içinde açar."
   t314: "TUI, LaTeX'i satır içinde işler — $E=mc^2$ ham TeX yerine Unicode matematik olarak görünür."
-  t315: "hermes dashboard, 127.0.0.1:9119 adresinde yerel bir web arayüzü başlatır — localhost dışına hiçbir veri çıkmaz."
+  t315: "hermes dashboard, 127.0.0.1:9120 adresinde yerel bir web arayüzü başlatır — localhost dışına hiçbir veri çıkmaz."
   t316: "hermes dashboard, xterm.js ve bir WebSocket PTY aracılığıyla tam Hermes TUI'sini tarayıcınıza gömer."
   t317: "~/.hermes/dashboard-themes/ içine iki palet rengi içeren bir YAML koyarak tüm panelin görünümünü değiştirin."
   t318: "Panel eklentileri yerleştir-çalıştır mantığıyla çalışır: ~/.hermes/dashboard-plugins/ içine manifest.json + JS paketi — npm derlemesi gerekmez."

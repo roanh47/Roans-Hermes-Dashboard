@@ -214,7 +214,7 @@ def _get_pty_active_session_files(app: FastAPI) -> dict[str, Path]:
     return _app_state_default(app, "pty_active_session_files", dict)
 
 
-app = FastAPI(title="Hermes Agent", version=get_version_info().base_version, lifespan=app_lifespan)
+app = FastAPI(title="Roan's Hermes Dashboard", version=get_version_info().base_version, lifespan=app_lifespan)
 
 from hermes_cli.dashboard_auth.body_limit import AuthBodyLimitMiddleware
 
@@ -1346,7 +1346,7 @@ def _run_serve(serve, config, host: str, port: int) -> None:
 
 def start_server(
     host: str = "127.0.0.1",
-    port: int = 9119,
+    port: int = 9120,
     open_browser: bool = True,
     allow_public: bool = False,
     initial_profile: str = "",

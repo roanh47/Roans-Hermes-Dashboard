@@ -26,7 +26,7 @@ export HOME=/opt/data
 cd /opt/data
 
 dash_host="${HERMES_DASHBOARD_HOST:-0.0.0.0}"
-dash_port="${HERMES_DASHBOARD_PORT:-9119}"
+dash_port="${HERMES_DASHBOARD_PORT:-9120}"
 
 # The dashboard's auth gate engages automatically on non-loopback binds and
 # REQUIRES a DashboardAuthProvider to be registered, else start_server fails

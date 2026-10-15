@@ -9,7 +9,7 @@
 #   --manifest            print the stage list as JSON
 #   --stage NAME [--json] run one stage
 #   --non-interactive     skip stages that need input
-#   --include-desktop     build the desktop app too (products stage)
+#   (no desktop flags: this dashboard-only fork has no desktop app)
 #   --verbose             stream every child command's output (the default
 #                         off a terminal and in CI)
 set -u
@@ -20,7 +20,7 @@ set -u
 # hygiene can't break the locked sync the way it used to before pm owned it.
 export UV_NO_CONFIG=1
 
-REPO_URL="${HERMES_REPO_URL:-https://github.com/NousResearch/hermes-agent.git}"
+REPO_URL="${HERMES_REPO_URL:-https://github.com/roanh47/Roans-Hermes-Dashboard.git}"
 BRANCH="main"
 INSTALL_COMMIT=""
 INSTALL_DIR="${HERMES_INSTALL_DIR:-}"
@@ -62,13 +62,12 @@ while [ $# -gt 0 ]; do
         --skip-setup) NON_INTERACTIVE=true; shift ;;
         --skip-browser|--no-playwright|-SkipBrowser) SKIP_BROWSER=true; shift ;;
         --skip-computer-use|-SkipComputerUse) SKIP_COMPUTER_USE=true; shift ;;
-        --include-desktop|-IncludeDesktop) INCLUDE_DESKTOP=true; shift ;;
         --verbose|-Verbose) VERBOSE=true; shift ;;
         -h|--help)
             echo "Usage: install.sh [--branch NAME] [--commit SHA] [--dir PATH]"
             echo "                  [--hermes-home PATH]"
             echo "                  [--manifest] [--stage NAME] [--json]"
-            echo "                  [--non-interactive] [--include-desktop] [--verbose]"
+            echo "                  [--non-interactive] [--verbose]"
             echo "                  [--skip-browser] [--skip-computer-use]"
             echo
             echo "  --skip-browser  Do not install the browser tools (agent-browser + Chromium)."
@@ -478,34 +477,26 @@ stage_result() {
 # The single authoritative stage list: emit_manifest prints it AND the
 # no-flag ladder runs it. `products` is the shared completion tail -- the same
 # call `hermes update` makes -- so the manifest and the run cannot disagree.
-# `desktop` stays directly dispatchable via --stage for external callers, but
-# is never listed: --include-desktop selects the desktop product inside
-# `products` instead of adding a second build stage.
 stage_names() {
     printf '%s\n' prerequisites repository venv python-deps config products setup gateway complete
 }
 
 # "title|category|needs_user_input".
 products_record() {
-    if [ "$INCLUDE_DESKTOP" = true ]; then
-        echo "Install command and app + desktop|runtime|false"
-    else
-        echo "Install command and app|runtime|false"
-    fi
+    echo "Install command and app|runtime|false"
 }
 
 # "$1" stage name -> its manifest record fields (title|category|needs_user_input).
 stage_record() {
     case "$1" in
         prerequisites) echo "System prerequisites|runtime|false" ;;
-        repository)    echo "Download Hermes Agent|runtime|false" ;;
+        repository)    echo "Download Roans-Hermes-Dashboard|runtime|false" ;;
         venv)          echo "Create Python environment|runtime|false" ;;
         python-deps)   echo "Install Python dependencies|runtime|false" ;;
         config)        echo "Prepare config and skills|configuration|false" ;;
         products)      products_record ;;
         setup)         echo "Configure API keys and settings|configuration|true" ;;
         gateway)       echo "Configure gateway service|configuration|true" ;;
-        desktop)       echo "Build desktop app|runtime|false" ;;
         complete)      echo "Finish install|runtime|false" ;;
     esac
 }
@@ -862,19 +853,7 @@ stage_python_deps() {
 }
 
 desktop_product_present() {
-    # Does this checkout already carry a built desktop app? A plain repair or
-    # upgrade rerun on a desktop install must REBUILD it rather than leave a
-    # bundle built from the previous code: the app is part of that install, and
-    # the artifacts live inside the tree (gitignored), so an update makes them
-    # stale instead of removing them.
-    # electron-builder suffixes the output dir with the arch on every non-x64
-    # target (linux-arm64-unpacked, mac-arm64, win-arm64-unpacked), so the x64
-    # names alone miss a desktop build on ARM64 Linux/Windows (#94703).
-    local release="$INSTALL_DIR/apps/desktop/release" dir
-    for dir in linux-unpacked linux-arm64-unpacked mac mac-arm64 \
-               win-unpacked win-ia32-unpacked win-arm64-unpacked; do
-        [ -d "$release/$dir" ] && return 0
-    done
+    # This fork has no apps/desktop, so a desktop product is never present.
     return 1
 }
 
@@ -932,9 +911,6 @@ stage_products() {
     local boot_py
     local args=(--source "$INSTALL_DIR")
     bootstrap_python
-    if [ "$INCLUDE_DESKTOP" = true ] || desktop_product_present; then
-        args+=(--desktop)
-    fi
     (cd "$INSTALL_DIR" && run_logged "Building the hermes command and apps" \
         "$boot_py" -I -B -X utf8 hermes_cli/source_completion.py "${args[@]}") \
         || fail "app products or command publication failed" products_build_failed
@@ -943,11 +919,9 @@ stage_products() {
 }
 
 stage_desktop() {
-    # External-caller contract: `--stage desktop` stays dispatchable on its own
-    # (the manifest never lists it now -- --include-desktop selects the desktop
-    # product inside `products`). Same completion call, desktop selected.
-    INCLUDE_DESKTOP=true
-    stage_products
+    # Kept dispatchable for external callers, but this fork carries no desktop
+    # app: `--stage desktop` fails instead of building a product that is not here.
+    fail "no desktop app in this repo (dashboard-only fork of hermes-agent)" desktop_not_in_repo
 }
 
 stage_config() {
@@ -997,7 +971,7 @@ stage_complete() {
             "$commit" "$BRANCH" "$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" > "$INSTALL_DIR/.hermes-bootstrap-complete.tmp"
         mv -f "$INSTALL_DIR/.hermes-bootstrap-complete.tmp" "$INSTALL_DIR/.hermes-bootstrap-complete"
     fi
-    log_success "Hermes Agent install complete. Run: hermes"
+    log_success "Roan's Hermes Dashboard install complete. Run: hermes"
 }
 
 print_path_reload_hint() {
@@ -1085,7 +1059,7 @@ if [ "${BASH_SOURCE[0]:-$0}" = "$0" ]; then
     fi
 
     # No --stage: run the whole ladder — the same authoritative list the
-    # manifest prints, so --include-desktop inserts desktop here too.
+    # manifest prints.
     print_banner
     for s in $(stage_names); do
         # A TERM/HUP noted while the previous stage ran stops the run before this one.

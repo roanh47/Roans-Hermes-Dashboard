@@ -3792,7 +3792,7 @@ tips:
   t312: "HERMES_TUI_THEME=light|dark|<hex> принудительно задаёт тему TUI в терминалах, которые не выставляют COLORFGBG."
   t313: "Ctrl+G или Ctrl+X Ctrl+E в TUI открывает буфер ввода в $EDITOR для длинных многострочных промптов."
   t314: "TUI отображает LaTeX прямо в тексте — $E=mc^2$ превращается в математические символы Unicode вместо сырого TeX."
-  t315: "hermes dashboard запускает локальный веб-интерфейс на 127.0.0.1:9119 — данные не покидают localhost."
+  t315: "hermes dashboard запускает локальный веб-интерфейс на 127.0.0.1:9120 — данные не покидают localhost."
   t316: "hermes dashboard встраивает полный TUI Hermes в браузер через xterm.js и PTY по WebSocket."
   t317: "Положите YAML с двумя цветами палитры в ~/.hermes/dashboard-themes/ — и вся панель сменит оформление."
   t318: "Плагины панели подключаются простым копированием: manifest.json + JS-бандл в ~/.hermes/dashboard-plugins/ — сборка npm не нужна."

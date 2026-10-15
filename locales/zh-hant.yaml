@@ -3792,7 +3792,7 @@ tips:
   t312: "HERMES_TUI_THEME=light|dark|<hex> 可在未設定 COLORFGBG 的終端機上強制指定 TUI 主題。"
   t313: "在 TUI 中按 Ctrl+G 或 Ctrl+X Ctrl+E，可用 $EDITOR 開啟輸入緩衝區，方便撰寫多行長提示。"
   t314: "TUI 會即時渲染 LaTeX — $E=mc^2$ 會顯示為 Unicode 數學符號，而非原始 TeX。"
-  t315: "hermes dashboard 會在 127.0.0.1:9119 啟動本機網頁 UI — 資料完全不離開 localhost。"
+  t315: "hermes dashboard 會在 127.0.0.1:9120 啟動本機網頁 UI — 資料完全不離開 localhost。"
   t316: "hermes dashboard 透過 xterm.js 與 WebSocket PTY，在瀏覽器中內嵌完整的 Hermes TUI。"
   t317: "在 ~/.hermes/dashboard-themes/ 放一份只含兩個調色盤顏色的 YAML，即可為整個儀表板換上新外觀。"
   t318: "儀表板外掛即放即用：把 manifest.json 與 JS bundle 放進 ~/.hermes/dashboard-plugins/ — 不需 npm 建置。"

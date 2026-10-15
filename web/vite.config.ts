@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 
 const configDir: string = fileURLToPath(new URL(".", import.meta.url));
 
-const BACKEND = process.env.HERMES_DASHBOARD_URL ?? "http://127.0.0.1:9119";
+const BACKEND = process.env.HERMES_DASHBOARD_URL ?? "http://127.0.0.1:9120";
 
 /**
  * In production the Python `hermes dashboard` server injects a one-shot

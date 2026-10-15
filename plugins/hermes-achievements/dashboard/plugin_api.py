@@ -28,7 +28,7 @@ _SNAPSHOT_CACHE_AT = 0
 _SCAN_STATUS: dict[str, Any] = {"state": "idle", "started_at": None, "finished_at": None, "last_error": None, "last_duration_ms": None, "run_count": 0}
 
 ERROR_RE = re.compile(r"\b(error|failed|failure|traceback|exception|permission denied|not found|eaddrinuse|already in use|timed out|blocked)\b", re.IGNORECASE)
-PORT_RE = re.compile(r"\b(port\s+)?(3000|5173|8000|8080|9119)\b.*\b(in use|already|taken|eaddrinuse)\b|\beaddrinuse\b", re.IGNORECASE)
+PORT_RE = re.compile(r"\b(port\s+)?(3000|5173|8000|8080|9120)\b.*\b(in use|already|taken|eaddrinuse)\b|\beaddrinuse\b", re.IGNORECASE)
 INSTALL_RE = re.compile(r"\b(npm|pnpm|yarn|pip|uv)\b.*\b(install|add)\b", re.IGNORECASE)
 SUCCESS_RE = re.compile(r"\b(success|passed|built|compiled|done|exit_code[\"']?\s*[:=]\s*0|verified|ok)\b", re.IGNORECASE)
 FILE_RE = re.compile(r"(?:/home/|~/?|\./|/mnt/)[\w./-]+\.(?:py|js|ts|tsx|jsx|css|html|md|json|yaml|yml|svg|sql|sh)")
